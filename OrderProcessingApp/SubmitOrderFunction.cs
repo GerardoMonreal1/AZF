@@ -5,19 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OrderProcessingApp;
 
-public class SubmitOrderFunction
+public class SubmitOrderFunction(ILogger<SubmitOrderFunction> logger)
 {
-    private readonly ILogger<SubmitOrderFunction> _logger;
-
-    public SubmitOrderFunction(ILogger<SubmitOrderFunction> logger)
-    {
-        _logger = logger;
-    }
-
     [Function("SubmitOrderFunction")]
     public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
     {
-        _logger.LogInformation("C# HTTP trigger function processed a request.");
+        logger.LogInformation("C# HTTP trigger function processed a request.");
         return new OkObjectResult("Welcome to Azure Functions!");
     }
 }
